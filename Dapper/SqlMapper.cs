@@ -1300,11 +1300,6 @@ this IDbConnection cnn, string sql, Func<TFirst, TSecond, TThird, TFourth, TRetu
                 length = fieldCount - startBound;
             }
 
-            if (fieldCount <= startBound)
-            {
-                throw new ArgumentException("When using the multi-mapping APIs ensure you set the splitOn param if you have keys other than Id", "splitOn");
-            }
-
             return
                  r =>
                  {
@@ -1744,11 +1739,6 @@ this IDbConnection cnn, string sql, Func<TFirst, TSecond, TThird, TFourth, TRetu
             if (length == -1)
             {
                 length = reader.FieldCount - startBound;
-            }
-
-            if (reader.FieldCount <= startBound)
-            {
-                throw new ArgumentException("When using the multi-mapping APIs ensure you set the splitOn param if you have keys other than Id", "splitOn");
             }
 
             var names = Enumerable.Range(startBound, length).Select(i => reader.GetName(i)).ToArray();
